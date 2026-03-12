@@ -343,7 +343,7 @@ const Nav = ({ view, setView }) => (
         BLD.CO.KE
       </button>
       <div style={{ display: 'flex', gap: 28 }}>
-        {[['ventures', 'VENTURES'], ['manifesto', 'MANIFESTO']].map(([v, label]) => (
+        {[['ventures', 'VENTURES'], ['manifesto', 'MANIFESTO'], ['contact', 'CONTACT']].map(([v, label]) => (
           <button key={v} onClick={() => setView(v)} className="nav-link" style={{
             background: 'none', border: 'none', cursor: 'pointer',
             fontFamily: 'IBM Plex Mono', fontSize: 10, letterSpacing: '0.15em',
@@ -713,9 +713,223 @@ const Manifesto = () => (
 );
 
 /* ─────────────────────────────────────────────
+   LEGAL PAGE SHELL
+───────────────────────────────────────────── */
+const LegalShell = ({ chip, title, children, setView }) => (
+  <div style={{ maxWidth: 760, margin: '0 auto', padding: '100px 24px 80px' }} className="anim-fade-in">
+    <button onClick={() => setView('home')} style={{
+      display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none',
+      color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontFamily: 'IBM Plex Mono',
+      fontSize: 10, letterSpacing: '0.12em', marginBottom: 48, transition: 'color 0.2s'
+    }}>
+      <ChevronRight size={12} style={{ transform: 'rotate(180deg)' }} /> HOME
+    </button>
+    <div style={{ marginBottom: 16 }}><Chip>{chip}</Chip></div>
+    <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 48, marginTop: 20 }}>
+      {title}
+    </h1>
+    {children}
+  </div>
+);
+
+const SectionBlock = ({ heading, children }) => (
+  <div style={{ marginBottom: 40 }}>
+    <h2 style={{ fontSize: 16, fontWeight: 700, color: 'white', marginBottom: 12, fontFamily: 'IBM Plex Mono', letterSpacing: '0.06em' }}>{heading}</h2>
+    <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.85 }}>{children}</div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────
+   PRIVACY POLICY
+───────────────────────────────────────────── */
+const PrivacyPolicy = ({ setView }) => (
+  <LegalShell chip="Legal" title="Privacy Policy" setView={setView}>
+    <p style={{ fontSize: 12, fontFamily: 'IBM Plex Mono', color: 'rgba(255,255,255,0.25)', marginBottom: 48, letterSpacing: '0.06em' }}>
+      EFFECTIVE DATE: MARCH 2026 · APPLIES TO BLD.CO.KE AND ALL SUBDOMAINS
+    </p>
+
+    <SectionBlock heading="01 · Overview">
+      <p>Tech C Ventures ("we", "us", or "our") operates the website at <strong style={{color:'rgba(255,255,255,0.7)'}}>bld.co.ke</strong> and a number of services hosted on its subdomains, including but not limited to <em>studentcenter.bld.co.ke</em>, <em>dispatch.bld.co.ke</em>, and others (collectively, the "Services"). This Privacy Policy explains how we collect, use, and protect your information when you visit or use any of these Services.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="02 · Information We Collect">
+      <p style={{marginBottom:12}}>We may collect the following categories of information:</p>
+      <ul style={{paddingLeft:20, display:'flex', flexDirection:'column', gap:8}}>
+        <li><strong style={{color:'rgba(255,255,255,0.6)'}}>Usage Data:</strong> Pages visited, time spent, browser type, device type, IP address, and referring URLs — collected automatically via server logs and analytics tools.</li>
+        <li><strong style={{color:'rgba(255,255,255,0.6)'}}>Account Data:</strong> If you create an account on any of our sub-applications, we collect the information you provide (e.g. name, email address, institution).</li>
+        <li><strong style={{color:'rgba(255,255,255,0.6)'}}>User-Generated Content:</strong> Any content you post, submit, or share through our platforms (e.g. stories, threads, comments).</li>
+        <li><strong style={{color:'rgba(255,255,255,0.6)'}}>Cookies & Tracking:</strong> We use cookies and similar tracking technologies for session management, analytics, and advertising purposes.</li>
+      </ul>
+    </SectionBlock>
+
+    <SectionBlock heading="03 · Google AdSense & Third-Party Advertising">
+      <p style={{marginBottom:12}}>Some of our Services display advertisements served by <strong style={{color:'rgba(255,255,255,0.7)'}}>Google AdSense</strong>. Google uses cookies (including the DoubleClick cookie) to serve ads based on your prior visits to our website and other sites on the internet. You may opt out of personalised advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" style={{color:'#22d3ee'}}>Google Ads Settings</a>.</p>
+      <p>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits. The use of advertising cookies enables Google and its partners to serve ads based on your visits to our sites and/or other sites on the internet. For more information, see <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style={{color:'#22d3ee'}}>Google's advertising policies</a>.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="04 · How We Use Your Information">
+      <ul style={{paddingLeft:20, display:'flex', flexDirection:'column', gap:8}}>
+        <li>To provide, maintain, and improve our Services</li>
+        <li>To personalise your experience across our platforms</li>
+        <li>To send relevant notifications (only where you have opted in)</li>
+        <li>To analyse usage patterns and improve platform performance</li>
+        <li>To serve relevant advertisements through Google AdSense</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+    </SectionBlock>
+
+    <SectionBlock heading="05 · Data Sharing">
+      <p>We do not sell your personal data. We may share data with third-party service providers (such as cloud hosting providers, analytics services, and advertising networks) solely to operate and improve our Services. These providers are contractually obligated to handle data in a manner consistent with this policy.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="06 · Data Retention">
+      <p>We retain personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law. Account data is retained for the duration of your account and for a reasonable period thereafter.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="07 · Your Rights">
+      <p style={{marginBottom:12}}>Depending on your jurisdiction, you may have the right to:</p>
+      <ul style={{paddingLeft:20, display:'flex', flexDirection:'column', gap:8}}>
+        <li>Access, correct, or delete your personal data</li>
+        <li>Withdraw consent at any time (where processing is based on consent)</li>
+        <li>Object to or restrict certain processing activities</li>
+        <li>Request data portability</li>
+      </ul>
+      <p style={{marginTop:12}}>To exercise any of these rights, contact us at <a href="mailto:privacy@bld.co.ke" style={{color:'#22d3ee'}}>privacy@bld.co.ke</a>.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="08 · Cookie Policy">
+      <p>We use essential cookies to operate our Services, analytics cookies (e.g. Google Analytics) to understand usage, and advertising cookies (e.g. Google AdSense) to display personalised ads. By using our Services, you consent to the placement of these cookies. You may disable cookies through your browser settings, but this may affect functionality.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="09 · Changes to This Policy">
+      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of our Services after changes constitutes your acceptance of the revised policy.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="10 · Contact">
+      <p>For questions about this Privacy Policy, contact us at <a href="mailto:privacy@bld.co.ke" style={{color:'#22d3ee'}}>privacy@bld.co.ke</a>.</p>
+    </SectionBlock>
+  </LegalShell>
+);
+
+/* ─────────────────────────────────────────────
+   TERMS OF SERVICE
+───────────────────────────────────────────── */
+const TermsOfService = ({ setView }) => (
+  <LegalShell chip="Legal" title="Terms of Service" setView={setView}>
+    <p style={{ fontSize: 12, fontFamily: 'IBM Plex Mono', color: 'rgba(255,255,255,0.25)', marginBottom: 48, letterSpacing: '0.06em' }}>
+      EFFECTIVE DATE: MARCH 2026 · APPLIES TO BLD.CO.KE AND ALL SUBDOMAINS
+    </p>
+
+    <SectionBlock heading="01 · Acceptance">
+      <p>By accessing or using any website or application operated by Tech C Ventures at <strong style={{color:'rgba(255,255,255,0.7)'}}>bld.co.ke</strong> or any of its subdomains, you agree to be bound by these Terms of Service. If you do not agree, you must not use our Services.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="02 · Eligibility">
+      <p>You must be at least 13 years of age to use our Services. By using the Services, you represent that you meet this requirement. If you are under 18, you confirm that you have obtained consent from a parent or legal guardian.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="03 · Use of Services">
+      <p style={{marginBottom:12}}>You agree to use our Services only for lawful purposes and in a manner that does not infringe the rights of others. You must not:</p>
+      <ul style={{paddingLeft:20, display:'flex', flexDirection:'column', gap:8}}>
+        <li>Post or transmit content that is abusive, defamatory, obscene, or otherwise objectionable</li>
+        <li>Attempt to gain unauthorised access to any part of our systems</li>
+        <li>Use our Services to distribute spam, malware, or any form of unsolicited communication</li>
+        <li>Scrape, copy, or redistribute content from our platforms without permission</li>
+        <li>Impersonate any person or entity</li>
+      </ul>
+    </SectionBlock>
+
+    <SectionBlock heading="04 · User Content">
+      <p>You retain ownership of content you post on our platforms. By posting content, you grant Tech C Ventures a non-exclusive, royalty-free, worldwide licence to use, display, and distribute that content in connection with operating the Services. You represent that you have all necessary rights to grant this licence.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="05 · Intellectual Property">
+      <p>All original content, branding, software, and designs on bld.co.ke and its subdomains are the intellectual property of Tech C Ventures unless otherwise stated. You may not reproduce, distribute, or create derivative works without our express written consent.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="06 · Third-Party Services & Advertising">
+      <p>Our Services may display advertisements served by third-party networks, including Google AdSense. We are not responsible for the content of third-party advertisements or the practices of advertisers. Your interactions with advertisers are solely between you and them.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="07 · Disclaimer of Warranties">
+      <p>Our Services are provided "as is" and "as available" without warranties of any kind, express or implied. We do not guarantee that the Services will be uninterrupted, error-free, or free of harmful components.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="08 · Limitation of Liability">
+      <p>To the fullest extent permitted by law, Tech C Ventures shall not be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of the Services.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="09 · Governing Law">
+      <p>These Terms shall be governed by and construed in accordance with the laws of Kenya. Any disputes shall be subject to the exclusive jurisdiction of the courts of Kenya.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="10 · Changes">
+      <p>We reserve the right to modify these Terms at any time. Continued use of the Services after changes constitutes acceptance of the revised Terms.</p>
+    </SectionBlock>
+
+    <SectionBlock heading="11 · Contact">
+      <p>For questions about these Terms, contact us at <a href="mailto:legal@bld.co.ke" style={{color:'#22d3ee'}}>legal@bld.co.ke</a>.</p>
+    </SectionBlock>
+  </LegalShell>
+);
+
+/* ─────────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────────── */
+const Contact = ({ setView }) => (
+  <div style={{ maxWidth: 760, margin: '0 auto', padding: '100px 24px 80px' }} className="anim-fade-in">
+    <button onClick={() => setView('home')} style={{
+      display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none',
+      color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontFamily: 'IBM Plex Mono',
+      fontSize: 10, letterSpacing: '0.12em', marginBottom: 48, transition: 'color 0.2s'
+    }}>
+      <ChevronRight size={12} style={{ transform: 'rotate(180deg)' }} /> HOME
+    </button>
+    <div style={{ marginBottom: 16 }}><Chip>Get In Touch</Chip></div>
+    <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800, color: 'white', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 16, marginTop: 20 }}>
+      Contact Us
+    </h1>
+    <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', lineHeight: 1.8, marginBottom: 60, maxWidth: 520 }}>
+      We're based in Nairobi, Kenya. Whether you're a researcher, builder, investor, or student — reach out through the channels below.
+    </p>
+
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 48 }}>
+      {[
+        { label: 'GENERAL ENQUIRIES', value: 'hello@bld.co.ke', href: 'mailto:hello@bld.co.ke', icon: '✉' },
+        { label: 'PRIVACY & DATA', value: 'privacy@bld.co.ke', href: 'mailto:privacy@bld.co.ke', icon: '🔒' },
+        { label: 'LEGAL', value: 'legal@bld.co.ke', href: 'mailto:legal@bld.co.ke', icon: '⚖' },
+        { label: 'LOCATION', value: 'Nairobi, Kenya', href: null, icon: '📍' },
+      ].map(({ label, value, href, icon }) => (
+        <div key={label} style={{
+          background: 'rgba(255,255,255,0.025)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 16, padding: 24,
+        }}>
+          <div style={{ fontSize: 20, marginBottom: 12 }}>{icon}</div>
+          <div style={{ fontFamily: 'IBM Plex Mono', fontSize: 9, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', marginBottom: 8 }}>{label}</div>
+          {href
+            ? <a href={href} style={{ fontSize: 14, color: '#22d3ee', textDecoration: 'none', fontFamily: 'IBM Plex Mono' }}>{value}</a>
+            : <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', fontFamily: 'IBM Plex Mono' }}>{value}</span>
+          }
+        </div>
+      ))}
+    </div>
+
+    <div style={{
+      padding: '20px 24px',
+      background: 'rgba(34,211,238,0.04)', border: '1px solid rgba(34,211,238,0.12)',
+      borderRadius: 16, fontFamily: 'IBM Plex Mono', fontSize: 11,
+      color: 'rgba(34,211,238,0.5)', letterSpacing: '0.06em', lineHeight: 1.7
+    }}>
+      We aim to respond to all enquiries within 2–3 business days.
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────────── */
-const Footer = ({ uptime }) => {
+const Footer = ({ uptime, setView }) => {
   const fmt = (s) => {
     const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
     return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
@@ -728,16 +942,26 @@ const Footer = ({ uptime }) => {
       height: 44, display: 'flex', alignItems: 'center'
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontFamily: 'IBM Plex Mono', fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.35)' }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22d3ee', boxShadow: '0 0 6px #22d3ee' }} className="pulse-ring-wrap">
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22d3ee', display: 'block' }} />
             </span>
             SYS.STATUS: ONLINE
           </span>
-          <span style={{ fontFamily: 'IBM Plex Mono', fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.08em' }}>
-            LOC: NBO.KE · 1.2921° S, 36.8219° E
-          </span>
+          <div style={{ display: 'flex', gap: 16 }}>
+            {[['privacy', 'PRIVACY'], ['terms', 'TERMS'], ['contact', 'CONTACT']].map(([v, label]) => (
+              <button key={v} onClick={() => setView(v)} style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                fontFamily: 'IBM Plex Mono', fontSize: 9, letterSpacing: '0.1em',
+                color: 'rgba(255,255,255,0.25)', padding: 0, transition: 'color 0.2s'
+              }}
+              onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.6)'}
+              onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.25)'}>
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <span style={{ fontFamily: 'IBM Plex Mono', fontSize: 10, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.1em' }}>
@@ -778,9 +1002,12 @@ export default function App() {
         {view === 'manifesto' && <Manifesto />}
         {view === 'ventures' && <VenturesList setView={setView} setActiveDivision={setActiveDivision} />}
         {view === 'divisionDetail' && activeDivision && <DivisionDetail division={activeDivision} setView={setView} />}
+        {view === 'privacy' && <PrivacyPolicy setView={setView} />}
+        {view === 'terms' && <TermsOfService setView={setView} />}
+        {view === 'contact' && <Contact setView={setView} />}
       </div>
 
-      <Footer uptime={uptime} />
+      <Footer uptime={uptime} setView={setView} />
     </div>
   );
 }
